@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grafico a Linea con Chart.js</title>
+    <!-- Includi Chart.js dal CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div style="width:80%; margin:auto;">
+        <!-- Il canvas in cui disegneremo il grafico -->
+        <canvas id="lineChart"></canvas>
+    </div>
+
+    <script>
+        // Funzione per caricare i dati dal file JSON
+        function loadJSON(callback) {
+            var xobj = new XMLHttpRequest();
+            xobj.overrideMimeType("application/json");
+            xobj.open('GET', 'tuofile.json', true);
+            xobj.onreadystatechange = function () {
+                if (xobj.readyState == 4 && xobj.status == "200") {
+                    callback(JSON.parse(xobj.responseText));
+                }
+            };
+            xobj.send(null);
+        }
+
+        // Funzione per disegnare il grafico una volta che i dati sono stati caricati
+        function drawChart(data) {
+            var ctx = document.getElementById('lineChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Grafico a Linea',
+                        data: data.values,
+                        fill: false,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            position: 'bottom'
+                        },
+                        y: {
+                            type: 'linear',
+                            position: 'left'
+                        }
+                    }
+                }
+            });
+        }
+
+        // Carica i dati e disegna il grafico quando la pagina è pronta
+        document.addEventListener('DOMContentLoaded', function() {
+            loadJSON(function(response) {
+                drawChart(response);
+            });
+        });
+    </script>
+</body>
+</html>
