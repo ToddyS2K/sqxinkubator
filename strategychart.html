@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grafico a Linea con Chart.js (e cio)</title>
+    <title>Grafico a Linea con Chart.js</title>
     <!-- Includi Chart.js dal CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -39,7 +39,7 @@
                 data: {
                     labels: data.labels,
                     datasets: [{
-                        label: 'Grafico andamento strategia',
+                        label: 'Grafico a Linea',
                         data: data.values,
                         fill: false,
                         borderColor: 'rgba(75, 192, 192, 1)',
@@ -48,14 +48,14 @@
                 },
                 options: {
                     scales: {
-                        x: {
+                        xAxes: [{
                             type: 'linear',
                             position: 'bottom'
-                        },
-                        y: {
+                        }],
+                        yAxes: [{
                             type: 'linear',
                             position: 'left'
-                        }
+                        }]
                     }
                 }
             });
@@ -72,4 +72,5 @@
     </script>
 </body>
 </html>
+
 
