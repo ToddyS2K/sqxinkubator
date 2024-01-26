@@ -14,11 +14,27 @@
     </div>
 
     <script>
+        // Funzione per ottenere il valore del parametro dalla query string dell'URL
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
         // Funzione per caricare i dati dal file JSON
         function loadJSON(callback) {
             var xobj = new XMLHttpRequest();
-            var timestamp = new Date().getTime(); // Ottieni il timestamp corrente
-            var url = 'data/tuofile.json?timestamp=' + timestamp; // Aggiungi il timestamp come parametro
+            var datafile = getParameterByName('datafile'); // Ottieni il valore del parametro
+            if (!datafile) {
+                console.error("Il parametro 'datafile' non è stato fornito.");
+                return;
+            }
+            var timestamp = new Date().getTime();
+            var url = datafile + '?timestamp=' + timestamp;
             xobj.overrideMimeType("application/json");
             xobj.open('GET', url, true);
             xobj.onreadystatechange = function () {
@@ -74,6 +90,3 @@
     </script>
 </body>
 </html>
-
-
-
