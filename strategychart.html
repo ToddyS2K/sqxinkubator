@@ -92,6 +92,13 @@
                 }
             });
         });
+
+        // Aggiungi un listener per ridisegnare il grafico quando la finestra viene ridimensionata
+        window.addEventListener('resize', function() {
+            myChart.destroy(); // distruggi l'istanza del grafico esistente
+            drawChart(response); // ridisegna il grafico con i nuovi dati
+        });
+        
     </script>
 </body>
 </html>
