@@ -18,10 +18,14 @@
         function loadJSON(callback) {
             var xobj = new XMLHttpRequest();
             xobj.overrideMimeType("application/json");
-            xobj.open('GET', 'https://toddys2k.github.io/sqxinkubator/data/tuofile.json', true);
+            xobj.open('GET', 'data/tuofile.json', true);
             xobj.onreadystatechange = function () {
-                if (xobj.readyState == 4 && xobj.status == "200") {
-                    callback(JSON.parse(xobj.responseText));
+                if (xobj.readyState == 4) {
+                    if (xobj.status == "200") {
+                        callback(JSON.parse(xobj.responseText));
+                    } else {
+                        console.error("Errore durante il caricamento del file JSON");
+                    }
                 }
             };
             xobj.send(null);
@@ -60,9 +64,12 @@
         // Carica i dati e disegna il grafico quando la pagina è pronta
         document.addEventListener('DOMContentLoaded', function() {
             loadJSON(function(response) {
-                drawChart(response);
+                if (response) {
+                    drawChart(response);
+                }
             });
         });
     </script>
 </body>
 </html>
+
