@@ -57,11 +57,12 @@
                 data: {
                     labels: data.labels,
                     datasets: [{
-                        label: 'Grafico a Linea',
+                        label: 'Rendimento strategia #'+getParameterByName('strategy'),
                         data: data.values,
                         fill: false,
                         borderColor: 'rgba(75, 192, 192, 1)',
                         borderWidth: 2
+                        tension: 0.1
                     }]
                 },
                 options: {
