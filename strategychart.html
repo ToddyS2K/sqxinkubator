@@ -28,7 +28,7 @@
         // Funzione per caricare i dati dal file JSON
         function loadJSON(callback) {
             var xobj = new XMLHttpRequest();
-            var datafile = getParameterByName('strategy'); // Ottieni il valore del parametro
+            var strategy = getParameterByName('strategy'); // Ottieni il valore del parametro
             if (!strategy) {
                 console.error("Il parametro 'strategy' non è stato fornito.");
                 return;
