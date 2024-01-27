@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div style="width:100%; height:100%; margin:auto;">
+    <div style="width:100%; height:400px; margin:auto;">
         <!-- Il canvas in cui disegneremo il grafico -->
         <canvas id="lineChart"></canvas>
     </div>
@@ -57,12 +57,12 @@
                 data: {
                     labels: data.labels,
                     datasets: [{
-                        label: 'Rendimento strategia #'+getParameterByName('strategy'),
+                        label: 'Rendimento strategia <b>#'+getParameterByName('strategy')+"</b>,
                         data: data.values,
                         fill: false,
                         borderColor: 'rgba(75, 192, 192, 1)',
                         borderWidth: 2,
-                        tension: 0.1
+                        tension: 0.2
                     }]
                 },
                 options: {
