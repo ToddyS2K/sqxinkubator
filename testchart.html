@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv='cache-control' content='no-cache'> 
+    <meta http-equiv='expires' content='0'> 
+    <meta http-equiv='pragma' content='no-cache'>    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grafico a Linea con Chart.js</title>
+    <!-- Includi Chart.js dal CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div style="width:100%; height:400px; margin:auto;">
+        <!-- Il canvas in cui disegneremo il grafico -->
+        <canvas id="lineChart"></canvas>
+    </div>
+
+    <script>
+        // Funzione per ottenere il valore del parametro dalla query string dell'URL
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        // Funzione per caricare i dati dal file JSON
+        function loadJSON(callback) {
+            var xobj = new XMLHttpRequest();
+            var strategy = getParameterByName('strategy'); // Ottieni il valore del parametro
+            if (!strategy) {
+                console.error("Il parametro 'strategy' non è stato fornito.");
+                return;
+            }
+            var timestamp = new Date().getTime();
+            var url = "data/strategy_" + strategy + '.json?timestamp=' + timestamp;
+            xobj.overrideMimeType("application/json");
+            xobj.open('GET', url, true);
+            xobj.onreadystatechange = function () {
+                if (xobj.readyState == 4) {
+                    if (xobj.status == "200") {
+                        callback(JSON.parse(xobj.responseText));
+                    } else {
+                        console.error("Errore durante il caricamento del file JSON");
+                    }
+                }
+            };
+            xobj.send(null);
+        }
+
+        // Funzione per disegnare il grafico una volta che i dati sono stati caricati
+        function drawChart(data) {
+            var ctx = document.getElementById('lineChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Rendimento strategia #'+getParameterByName('strategy'),
+                        data: data.values,
+                        fill: false,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 2,
+                        tension: 0.2
+                    }]
+                },
+                options: {
+                   responsive: true,
+                   maintainAspectRatio: false 
+
+                }
+                //options: {
+                //    scales: {
+                //        xAxes: [{
+                //           type: 'linear',
+                //            position: 'bottom'
+                //        }],
+                //        yAxes: [{
+                //            type: 'linear',
+                //            position: 'left'
+                //        }]
+                //    }
+                //}
+            });
+        }
+
+        // Carica i dati e disegna il grafico quando la pagina è pronta
+        document.addEventListener('DOMContentLoaded', function() {
+            loadJSON(function(response) {
+                if (response) {
+                    drawChart(response);
+                }
+            });
+        });
+
+        // Aggiungi un listener per ridisegnare il grafico quando la finestra viene ridimensionata
+        //window.addEventListener('resize', function() {
+        //    myChart.destroy(); // distruggi l'istanza del grafico esistente
+        //   drawChart(response); // ridisegna il grafico con i nuovi dati
+        //});
+        
+    </script>
+</body>
+</html>
