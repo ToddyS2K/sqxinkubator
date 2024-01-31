@@ -50,18 +50,6 @@
             width: 50px;
         }
         
-        td[data-column='Profitto'] {
-            color: white;
-            font-weight: bold;
-       }
-
-       td[data-column='Profitto'][data-positive='true'] {
-           background-color: green;
-       }
-
-       td[data-column='Profitto'][data-positive='false'] {
-           background-color: red;            
-       }
     </style>    
 </head>
 <body>
@@ -181,7 +169,8 @@
                 }
                 
                 var pips = parseFloat(data.tableData[i].pips);
-                cell4.innerHTML = (pips >= 0) ? '+' + pips : pips;
+                //cell4.innerHTML = (pips >= 0) ? '+' + pips : pips;
+                cell4.innerHTML = pips;
             }            
         }
 
