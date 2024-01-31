@@ -9,6 +9,45 @@
     <title>Grafico a Linea con Chart.js</title>
     <!-- Includi Chart.js dal CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+
+        div {
+            width: 80%;
+            margin: auto;
+        }
+
+        canvas {
+            border: 1px solid #ddd;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        th[data-column='100px'], td[data-column='100px'] {
+            width: 100px;
+        }
+
+        th[data-column='50px'], td[data-column='50px'] {
+            width: 50px;
+        }
+    </style>    
 </head>
 <body>
     <div style="width:100%; height:400px; margin:auto;">
