@@ -173,7 +173,8 @@
                 var profitto = parseFloat(data.tableData[i].profitto).toFixed(2);
                 cell3.innerHTML = (profitto >= 0) ? '+' + profitto : profitto;
                 cell3.setAttribute('data-positive', profitto >= 0);
-
+                
+                var pips = parseFloat(data.tableData[i].pips);
                 cell4.innerHTML = (pips >= 0) ? '+' + pips : pips;
             }            
         }
