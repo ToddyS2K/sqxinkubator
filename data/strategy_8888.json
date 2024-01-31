@@ -1,0 +1,36 @@
+{
+  "labels": ["Gen", "Feb", "Mar", "Apr", "Mag"],
+  "values": [10, 25, 18, 32, 20],
+  "tableData": [
+    {
+      "dataChiusura": "2024-01-26",
+      "ordine": "Acquisto",
+      "profitto": 50,
+      "pips": 30
+    },
+    {
+      "dataChiusura": "2024-02-15",
+      "ordine": "Vendita",
+      "profitto": -20,
+      "pips": -15
+    },
+    {
+      "dataChiusura": "2024-03-08",
+      "ordine": "Acquisto",
+      "profitto": 30,
+      "pips": 25
+    },
+    {
+      "dataChiusura": "2024-04-18",
+      "ordine": "Vendita",
+      "profitto": -10,
+      "pips": -5
+    },
+    {
+      "dataChiusura": "2024-05-20",
+      "ordine": "Acquisto",
+      "profitto": 40,
+      "pips": 20
+    }
+  ]
+}
