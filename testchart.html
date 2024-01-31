@@ -171,10 +171,10 @@
                 // Popola la colonna Profitto e assegna l'attributo data-positive
                 //var profitto = data.tableData[i].profitto;
                 var profitto = parseFloat(data.tableData[i].profitto).toFixed(2);
-                cell3.innerHTML = profitto;
+                cell3.innerHTML = (profitto >= 0) ? '+' + profitto : profitto;
                 cell3.setAttribute('data-positive', profitto >= 0);
-                
-                cell4.innerHTML = data.tableData[i].pips;
+
+                cell4.innerHTML = (pips >= 0) ? '+' + pips : pips;
             }            
         }
 
