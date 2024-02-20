@@ -81,23 +81,26 @@
             <button class="tablinks" onclick="openTab(event, 'Comparazione')">Compare</button>
         </div>
         
-        <!-- Il canvas in cui disegneremo il grafico -->
-        <canvas id="lineChart"></canvas>
+        <!-- Contenuto dei tabs -->
+        <div id="Stats" class="tabcontent" style="display:block;">        
+           <!-- Il canvas in cui disegneremo il grafico -->
+           <canvas id="lineChart"></canvas>
         
-        <!-- Tabella per i dati -->
-        <table style="width:100%; margin-top:20px;" border="1">
-            <thead>
-                <tr>
-                    <th nowrap style="width: 30%">Data chiusura</th>
-                    <th style="width: 23%">Ordine</th>
-                    <th style="width: 23%">P/L (reale)</th>
-                    <th style="width: 23%">Pips</th>
-                </tr>
-            </thead>
-            <tbody id="data-table-body">
-                <!-- I dati della tabella verranno inseriti qui tramite JavaScript -->
-            </tbody>
-        </table>
+           <!-- Tabella per i dati -->
+           <table style="width:100%; margin-top:20px;" border="1">
+               <thead>
+                   <tr>
+                       <th nowrap style="width: 30%">Data chiusura</th>
+                       <th style="width: 23%">Ordine</th>
+                       <th style="width: 23%">P/L (reale)</th>
+                       <th style="width: 23%">Pips</th>
+                   </tr>
+               </thead>
+               <tbody id="data-table-body">
+                   <!-- I dati della tabella verranno inseriti qui tramite JavaScript -->
+               </tbody>
+           </table>
+        </div>
     </div>
 
     <script>
