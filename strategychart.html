@@ -89,8 +89,8 @@
             <table style="width:100%; margin-top:20px;" border="1">
                 <thead>
                     <tr>
-                        <th style="width: 25px">#</th> 
-                        <th nowrap style="width: 29%">Data chiusura</th>
+                        <th style="min-width: 25px">#</th> 
+                        <th nowrap style="width: 30%">Data chiusura</th>
                         <th style="width: 23%">Ordine</th>
                         <th style="width: 23%">P/L (reale)</th>
                         <th style="width: 23%">Pips</th>
@@ -213,7 +213,7 @@
                 
                 cell1.innerHTML = (data.tableData.length-i).toString().padStart(2, '0');
                 cell1.style.color = '#4BC0C0';
-                cell1.style.fontWeight = "bold";
+                // cell1.style.fontWeight = "bold";
                 cell2.innerHTML = data.tableData[i].dataChiusura;
                 cell3.innerHTML = data.tableData[i].ordine;
 
