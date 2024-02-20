@@ -98,7 +98,7 @@
         </div>
 
         <!-- Contenuto dei tabs -->
-        <div id="Stats" class="tabcontent" style="display:block; height:400px">
+        <div id="Stats" class="tabcontent" style="display:block;">
             <!-- Il canvas in cui disegneremo il grafico -->
             <canvas id="statsChart"></canvas>
 
@@ -193,7 +193,11 @@
                 }
             });
 
-            // Funzione per generare il grafico di "Stats" (il primo grafico)
+            generateStatsChart(); // Chiamiamo la funzione per generare il grafico "Stats" appena il documento è pronto
+        }
+
+        // Funzione per generare il grafico "Stats" (il primo grafico)
+        function generateStatsChart() {
             var statsCtx = document.getElementById('statsChart').getContext('2d');
             var statsChart = new Chart(statsCtx, {
                 type: 'line',
