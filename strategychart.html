@@ -50,110 +50,31 @@
         th[data-column='50px'], td[data-column='50px'] {
             width: 50px;
         }
-
-        /* Stili per i tabs */
-        .tab {
-            display: none; /* Nascondi il menu dei tab inizialmente */
-            overflow: hidden;
-            border: 1px solid #ccc;
-            background-color: #f1f1f1;
-            margin-bottom: 20px;
-        }
-
-        .tab button {
-            background-color: inherit;
-            float: left;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            padding: 14px 16px;
-            transition: 0.3s;
-            font-size: 17px;
-        }
-
-        .tab button:hover {
-            background-color: #ddd;
-        }
-
-        .tab button.active {
-            background-color: #ccc;
-        }     
         
     </style>    
 </head>
 <body>
     <div style="width:100%; height:400px; margin:auto;">
-        <!-- Tabs -->
-        <div id="tabs" class="tab">
-            <button class="tablinks active" onclick="openTab(event, 'Stats')">Stats</button>
-            <!-- Controlla la presenza del file JSON per il secondo grafico e mostra il tab solo se il file esiste -->
-            <button id="compareTab" class="tablinks" style="display: block;" onclick="openTab(event, 'Compare')">Compare</button>
-        </div>   
-
-        <!-- Contenuto dei tabs -->
-        <div id="Stats" class="tabcontent" style="display:block;">        
-             <!-- Il canvas in cui disegneremo il grafico -->
-             <canvas id="lineChart"></canvas>
-            
-             <!-- Tabella per i dati -->
-             <table style="width:100%; margin-top:20px;" border="1">
-                 <thead>
-                     <tr>
-                         <th nowrap style="width: 30%">Data chiusura</th>
-                         <th style="width: 23%">Ordine</th>
-                         <th style="width: 23%">P/L (reale)</th>
-                         <th style="width: 23%">Pips</th>
-                     </tr>
-                 </thead>
-                 <tbody id="data-table-body">
-                     <!-- I dati della tabella verranno inseriti qui tramite JavaScript -->
-                 </tbody>
-             </table>
-        </div>
-    
-        <div id="Compare" class="tabcontent" style="display:none;">
-            <!-- Il canvas in cui disegneremo il grafico di confronto -->
-            <canvas id="compareChart"></canvas>
-        </div>
-    </div>
-    
-    <script>
-        // Funzione per cambiare il tab attivo
-        function openTab(evt, tabName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(tabName).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
-
-        // Imposta il primo tab come attivo all'avvio
-        document.getElementsByClassName("tablinks")[0].click();
-
-        // Controlla se il file JSON per il secondo grafico esiste
-        var xhr = new XMLHttpRequest();
-        var strategy = getParameterByName('strategy'); // Ottieni il valore del parametro
-        var timestamp = new Date().getTime();
-        var url = "data/strategy_live_" + strategy + '.json?timestamp=' + timestamp;
-        xhr.open('HEAD', url, true);
-        xhr.onreadystatechange = function(){
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    // Se il file esiste, mostra il menu dei tab
-                    document.getElementById('tabs').style.display = 'block';
-                    // Mostra il tab "Compare"
-                    document.getElementById('compareTab').style.display = 'block';
-                }
-            }
-        };
-        xhr.send();
+        <!-- Il canvas in cui disegneremo il grafico -->
+        <canvas id="lineChart"></canvas>
         
+        <!-- Tabella per i dati -->
+        <table style="width:100%; margin-top:20px;" border="1">
+            <thead>
+                <tr>
+                    <th nowrap style="width: 30%">Data chiusura</th>
+                    <th style="width: 23%">Ordine</th>
+                    <th style="width: 23%">P/L (reale)</th>
+                    <th style="width: 23%">Pips</th>
+                </tr>
+            </thead>
+            <tbody id="data-table-body">
+                <!-- I dati della tabella verranno inseriti qui tramite JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
         // Funzione per ottenere il valore del parametro dalla query string dell'URL
         function getParameterByName(name, url) {
             if (!url) url = window.location.href;
