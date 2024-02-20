@@ -43,14 +43,33 @@
             color: white;
         }
 
-        th[data-column='100px'], td[data-column='100px'] {
-            width: 100px;
+        /* Stili per i tabs */
+        .tab {
+            display: none; /* Nascondi il menu dei tab inizialmente */
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+            margin-bottom: 20px;
         }
 
-        th[data-column='50px'], td[data-column='50px'] {
-            width: 50px;
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
         }
-        
+
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        .tab button.active {
+            background-color: #ccc;
+        }        
     </style>    
 </head>
 <body>
