@@ -80,7 +80,7 @@
         </div>
         
         <!-- Contenuto dei tabs -->
-        <div id="Stats" class="tabcontent" style="display:block;height:400px;width:100%: margin:auto;">        
+        <div id="Stats" class="tabcontent" style="display:block; height:400px; width:100%; margin:auto;">        
             <!-- Il canvas in cui disegneremo il grafico -->
             <canvas id="lineChart"></canvas>
         
@@ -88,7 +88,7 @@
             <table style="width:100%; margin-top:20px;" border="1">
                 <thead>
                     <tr>
-                        <th nowrap style="width: 20px">#</th> 
+                        <th style="width: 25px">#</th> 
                         <th nowrap style="width: 30%">Data chiusura</th>
                         <th style="width: 23%">Ordine</th>
                         <th style="width: 23%">P/L (reale)</th>
@@ -101,7 +101,7 @@
             </table>
         </div>
         
-        <div id="Compare" class="tabcontent" style="display:none;height:400px;width:100%: margin:auto;">
+        <div id="Compare" class="tabcontent" style="display:none; height:400px; width:100%; margin:auto;">
             <!-- Il canvas in cui disegneremo il grafico di confronto -->
             <canvas id="compareChart"></canvas>
         </div>
@@ -210,7 +210,7 @@
                 var cell4 = row.insertCell(3);
                 var cell5 = row.insertCell(4);
 
-                cell1.innerHTML = i;
+                cell1.innerHTML = data.tableData.length-i;
                 cell2.innerHTML = data.tableData[i].dataChiusura;
                 cell3.innerHTML = data.tableData[i].ordine;
 
