@@ -89,7 +89,7 @@
             <table style="width:100%; margin-top:20px;" border="1">
                 <thead>
                     <tr>
-                        <th style="min-width: 22px">#</th> 
+                        <th style="min-width: 20px">#</th> 
                         <th nowrap style="width: 30%">Data chiusura</th>
                         <th style="width: 23%">Ordine</th>
                         <th style="width: 23%">P/L (reale)</th>
@@ -145,13 +145,17 @@
         // Funzione per caricare i dati dal file JSON
         function loadJSON(callback) {
             var xobj = new XMLHttpRequest();
-            var strategy = getParameterByName('strategy'); // Ottieni il valore del parametro
+            var strategy = getParameterByName('strategy');  // Ottieni il valore del parametro
+            var strategyLive = getParameterByName('live');
             if (!strategy) {
                 console.error("Il parametro 'strategy' non è stato fornito.");
                 return;
             }
             var timestamp = new Date().getTime();
-            var url = "data/strategy_" + strategy + '.json?timestamp=' + timestamp;
+            var url = "data/strategy_";
+            if (strategyLive === "1")
+               url += "live_";
+            url =+ strategy + '.json?timestamp=' + timestamp;
             xobj.overrideMimeType("application/json");
             xobj.open('GET', url, true);
             xobj.onreadystatechange = function () {
