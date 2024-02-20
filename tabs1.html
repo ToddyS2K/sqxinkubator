@@ -192,6 +192,33 @@
                     }
                 }
             });
+
+            // Funzione per generare il grafico di "Stats" (il primo grafico)
+            var statsCtx = document.getElementById('statsChart').getContext('2d');
+            var statsChart = new Chart(statsCtx, {
+                type: 'line',
+                data: {
+                    labels: ['01/01/2023', '02/01/2023', '03/01/2023', '04/01/2023', '05/01/2023'],
+                    datasets: [{
+                        label: 'Dati di esempio',
+                        data: [10, 15, 20, 18, 25],
+                        borderColor: 'green',
+                        backgroundColor: 'rgba(0, 255, 0, 0.1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
         }
     </script>
 </body>
