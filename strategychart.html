@@ -59,6 +59,7 @@
             padding: 8px 8px;
             transition: 0.3s;
             font-size: 12px;
+            color: #666;
         }
 
         .tab button:hover {
@@ -75,7 +76,7 @@
         <!-- Tabs -->
         <div id="tabs" class="tab">
             <button class="tablinks active" onclick="openTab(event, 'Stats')">📊 Statistiche</button>
-            <button class="tablinks" id="compareTab" style="display: block;" onclick="openTab(event, 'Compare')">🪞 Confronta test</button>
+            <button class="tablinks" id="compareTab" style="display: none;" onclick="openTab(event, 'Compare')">🔬 Confronta test</button>
         </div>
         
         <!-- Contenuto dei tabs -->
@@ -208,8 +209,8 @@
                 var cell3 = row.insertCell(2);
                 var cell4 = row.insertCell(3);
                 var cell5 = row.insertCell(4);
-
-                cell1.innerHTML = data.tableData.length-i;
+                
+                cell1.innerHTML = (data.tableData.length-i).toString().padStart(2, '0');
                 cell2.innerHTML = data.tableData[i].dataChiusura;
                 cell3.innerHTML = data.tableData[i].ordine;
 
