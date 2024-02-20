@@ -48,7 +48,7 @@
             overflow: hidden;
             border: 1px solid #ccc;
             background-color: #f1f1f1;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
         .tab button {
@@ -57,9 +57,9 @@
             border: none;
             outline: none;
             cursor: pointer;
-            padding: 10px 12px;
+            padding: 8px 10px;
             transition: 0.3s;
-            font-size: 14px;
+            font-size: 12px;
         }
 
         .tab button:hover {
@@ -76,7 +76,7 @@
         <!-- Tabs -->
         <div id="tabs" class="tab">
             <button class="tablinks active" onclick="openTab(event, 'Stats')">📊 Statistiche</button>
-            <button id="compareTab" class="tablinks" style="display: none;" onclick="openTab(event, 'Compare')">Confronta test</button>
+            <button id="compareTab" class="tablinks" style="display: none;" onclick="openTab(event, 'Compare')">🪞 Confronta test</button>
         </div>
         
         <!-- Contenuto dei tabs -->
@@ -98,6 +98,11 @@
                     <!-- I dati della tabella verranno inseriti qui tramite JavaScript -->
                 </tbody>
             </table>
+        </div>
+        
+        <div id="Compare" class="tabcontent" style="display:none;">
+            <!-- Il canvas in cui disegneremo il grafico di confronto -->
+            <canvas id="compareChart"></canvas>
         </div>
     </div>
 
