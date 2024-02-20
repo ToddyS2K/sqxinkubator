@@ -154,9 +154,9 @@
             var timestamp = new Date().getTime();
             var url = "data/strategy_";
             if (strategyLive === "1") {
-               url += "live_";
+               url = url + "live_";
             }
-            url =+ strategy + '.json?timestamp=' + timestamp;
+            url = url + strategy + '.json?timestamp=' + timestamp;
             xobj.overrideMimeType("application/json");
             xobj.open('GET', url, true);
             xobj.onreadystatechange = function () {
