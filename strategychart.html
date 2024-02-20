@@ -208,25 +208,27 @@
                 var cell2 = row.insertCell(1);
                 var cell3 = row.insertCell(2);
                 var cell4 = row.insertCell(3);
+                var cell5 = row.insertCell(4);
 
-                cell1.innerHTML = data.tableData[i].dataChiusura;
-                cell2.innerHTML = data.tableData[i].ordine;
+                cell1.innerHTML = i;
+                cell2.innerHTML = data.tableData[i].dataChiusura;
+                cell3.innerHTML = data.tableData[i].ordine;
 
                 // Popola la colonna Profitto e assegna l'attributo data-positive
                 //var profitto = data.tableData[i].profitto;
                 var profitto = parseFloat(data.tableData[i].profitto).toFixed(2);
-                cell3.innerHTML = profitto;
+                cell4.innerHTML = profitto;
                 //cell3.setAttribute('data-positive', profitto >= 0);
                 // Verifica il segno del valore di profitto per il cambio di colore
                 if (profitto > 0) {
-                    cell3.style.color = 'green';
+                    cell4.style.color = 'green';
                 } else if (profitto < 0) {
-                    cell3.style.color = 'red';
+                    cell4.style.color = 'red';
                 }
                 
                 var pips = parseFloat(data.tableData[i].pips);
                 //cell4.innerHTML = (pips >= 0) ? '+' + pips : pips;
-                cell4.innerHTML = pips;
+                cell5.innerHTML = pips;
             }            
         }
 
