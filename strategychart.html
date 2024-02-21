@@ -200,29 +200,6 @@
                 }
             });
 
-       
-        function drawChartTest(data) {
-            var ctx = document.getElementById('lineChart').getContext('2d');
-            var myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: data.labels,
-                    datasets: [{
-                        label: 'Rendimento strategia (test) #'+getParameterByName('strategy'),
-                        data: data.values,
-                        fill: false,
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 2,
-                        tension: 0.2
-                    }]
-                },
-                options: {
-                   responsive: true,
-                   maintainAspectRatio: false 
-
-                }
-            });            
-
             // Popola la tabella con i dati
             var tableBody = document.getElementById('data-table-body');
             for (var i = 0; i < data.tableData.length; i++) {
@@ -257,6 +234,30 @@
             }            
         }
 
+        function drawCompareCharts(data) {
+            var ctx = document.getElementById('lineChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Rendimento strategia #'+getParameterByName('strategy'),
+                        data: data.values,
+                        fill: false,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 2,
+                        tension: 0.2
+                    }]
+                },
+                options: {
+                   responsive: true,
+                   maintainAspectRatio: false 
+
+                }
+            });
+
+        }
+        
         // Carica i dati e disegna il grafico quando la pagina è pronta
         document.addEventListener('DOMContentLoaded', function() {
             loadJSON(function(response) {
