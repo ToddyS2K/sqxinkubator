@@ -131,6 +131,10 @@
 
         // Imposta il primo tab come attivo all'avvio
         document.getElementsByClassName("tablinks")[0].click();
+        // Visualizza tab di comparazione se la strategia è live
+        if (getParameterByName('live') == "1") {
+            document.getElementById('Compare').style.display = "block"; 
+        }
         
         // Funzione per ottenere il valore del parametro dalla query string dell'URL
         function getParameterByName(name, url) {
@@ -180,7 +184,7 @@
                 data: {
                     labels: data.labels,
                     datasets: [{
-                        //label: 'Rendimento strategia #'+getParameterByName('strategy'),
+                        label: 'Rendimento strategia #'+getParameterByName('strategy'),
                         data: data.values,
                         fill: false,
                         borderColor: 'rgba(75, 192, 192, 1)',
