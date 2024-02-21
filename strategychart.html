@@ -130,7 +130,8 @@
         }
 
         // Imposta il primo tab come attivo all'avvio
-        document.getElementsByClassName("tablinks")[0].click();        
+        document.getElementsByClassName("tablinks")[0].click();
+        
         // Funzione per ottenere il valore del parametro dalla query string dell'URL
         function getParameterByName(name, url) {
             if (!url) url = window.location.href;
@@ -179,7 +180,7 @@
                 data: {
                     labels: data.labels,
                     datasets: [{
-                        label: 'Rendimento strategia #'+getParameterByName('strategy'),
+                        //label: 'Rendimento strategia #'+getParameterByName('strategy'),
                         data: data.values,
                         fill: false,
                         borderColor: 'rgba(75, 192, 192, 1)',
