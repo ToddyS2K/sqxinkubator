@@ -103,6 +103,7 @@
         </div>
         
         <div id="Compare" class="tabcontent" style="display:none; height:400px; width:100%">
+            <canvas id="lineChart"></canvas>
             <!-- Il canvas in cui disegneremo il grafico di confronto -->
             <canvas id="compareChart"></canvas>
         </div>
@@ -197,19 +198,30 @@
                    maintainAspectRatio: false 
 
                 }
-                //options: {
-                //    scales: {
-                //        xAxes: [{
-                //           type: 'linear',
-                //            position: 'bottom'
-                //        }],
-                //        yAxes: [{
-                //            type: 'linear',
-                //            position: 'left'
-                //        }]
-                //    }
-                //}
             });
+
+       
+        function drawChartTest(data) {
+            var ctx = document.getElementById('lineChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Rendimento strategia (test) #'+getParameterByName('strategy'),
+                        data: data.values,
+                        fill: false,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 2,
+                        tension: 0.2
+                    }]
+                },
+                options: {
+                   responsive: true,
+                   maintainAspectRatio: false 
+
+                }
+            });            
 
             // Popola la tabella con i dati
             var tableBody = document.getElementById('data-table-body');
