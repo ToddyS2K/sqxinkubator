@@ -126,7 +126,11 @@
 
             // Se il tab Compare è attivo, genera un grafico di confronto
             if (tabName === 'Compare') {
-                drawChart();
+                 loadJSON(function(response) {
+                    if (response) {
+                        drawChart(response);
+                    }
+                });
                 drawCompareCharts();
             }
         }
