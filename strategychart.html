@@ -128,10 +128,10 @@
             if (tabName === 'Compare') {
                  loadJSON(function(response) {
                     if (response) {
-                        drawChart(response);
+                        drawCompareChart(response);
                     }
                 });
-                drawCompareCharts();
+                
             }
         }
 
@@ -240,7 +240,7 @@
         }
 
         function drawCompareCharts(data) {
-            var ctx = document.getElementById('lineChart').getContext('2d');
+            var ctx = document.getElementById('compareChart').getContext('2d');
             var myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
