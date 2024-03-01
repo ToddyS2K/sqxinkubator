@@ -128,7 +128,7 @@
             if (tabName === 'Compare') {
                 loadJSON(function(response) {
                     if (response) {
-                        drawChart(response,'compareChart1');
+                        drawChart(response,'compareChart1',false);
                     }
                 },"1");
 			
@@ -188,7 +188,7 @@
         }
 
         // Funzione per disegnare il grafico una volta che i dati sono stati caricati
-        function drawChart(data,canvaName) {
+        function drawChart(data,canvaName,drawTable) {
             // JS - Destroy exiting Chart Instance to reuse <canvas> element
             let chartStatus = Chart.getChart(canvaName); // <canvas> id
             if (chartStatus != undefined) {
@@ -215,38 +215,40 @@
                 }
             });
 
-            // Popola la tabella con i dati
-            var tableBody = document.getElementById('data-table-body');
-            for (var i = 0; i < data.tableData.length; i++) {
-                var row = tableBody.insertRow(i);
-                var cell1 = row.insertCell(0);
-                var cell2 = row.insertCell(1);
-                var cell3 = row.insertCell(2);
-                var cell4 = row.insertCell(3);
-                var cell5 = row.insertCell(4);
-                
-                cell1.innerHTML = (data.tableData.length-i).toString().padStart(2, '0');
-                cell1.style.color = '#4BC0C0';
-                // cell1.style.fontWeight = "bold";
-                cell2.innerHTML = data.tableData[i].dataChiusura;
-                cell3.innerHTML = data.tableData[i].ordine;
+            if (drawTable) {
+				// Popola la tabella con i dati
+				var tableBody = document.getElementById('data-table-body');
+				for (var i = 0; i < data.tableData.length; i++) {
+					var row = tableBody.insertRow(i);
+					var cell1 = row.insertCell(0);
+					var cell2 = row.insertCell(1);
+					var cell3 = row.insertCell(2);
+					var cell4 = row.insertCell(3);
+					var cell5 = row.insertCell(4);
+					
+					cell1.innerHTML = (data.tableData.length-i).toString().padStart(2, '0');
+					cell1.style.color = '#4BC0C0';
+					// cell1.style.fontWeight = "bold";
+					cell2.innerHTML = data.tableData[i].dataChiusura;
+					cell3.innerHTML = data.tableData[i].ordine;
 
-                // Popola la colonna Profitto e assegna l'attributo data-positive
-                //var profitto = data.tableData[i].profitto;
-                var profitto = parseFloat(data.tableData[i].profitto).toFixed(2);
-                cell4.innerHTML = profitto;
-                //cell3.setAttribute('data-positive', profitto >= 0);
-                // Verifica il segno del valore di profitto per il cambio di colore
-                if (profitto > 0) {
-                    cell4.style.color = 'green';
-                } else if (profitto < 0) {
-                    cell4.style.color = 'red';
+					// Popola la colonna Profitto e assegna l'attributo data-positive
+					//var profitto = data.tableData[i].profitto;
+					var profitto = parseFloat(data.tableData[i].profitto).toFixed(2);
+					cell4.innerHTML = profitto;
+					//cell3.setAttribute('data-positive', profitto >= 0);
+					// Verifica il segno del valore di profitto per il cambio di colore
+					if (profitto > 0) {
+						cell4.style.color = 'green';
+					} else if (profitto < 0) {
+						cell4.style.color = 'red';
+					}
+					
+					var pips = parseFloat(data.tableData[i].pips);
+					//cell4.innerHTML = (pips >= 0) ? '+' + pips : pips;
+					cell5.innerHTML = pips;
                 }
-                
-                var pips = parseFloat(data.tableData[i].pips);
-                //cell4.innerHTML = (pips >= 0) ? '+' + pips : pips;
-                cell5.innerHTML = pips;
-            }            
+            }			
         }
 
         function drawCompareChart(data) {
@@ -282,7 +284,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             loadJSON(function(response) {
                 if (response) {
-                    drawChart(response,'lineChart');
+                    drawChart(response,'lineChart',true);
                 }
             },getParameterByName('live'));
         });
