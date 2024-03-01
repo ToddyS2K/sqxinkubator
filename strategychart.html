@@ -77,7 +77,7 @@
         <!-- Tabs -->
         <div id="tabs" class="tab">
             <button class="tablinks active" onclick="openTab(event, 'Stats')">📊 Statistiche</button>
-            <button class="tablinks" id="compareTab" style="display: none;" onclick="openTab(event, 'Compare')">🔬 Confronta test</button>
+            <button class="tablinks" id="compareTab" style="display: none;" onclick="openTab(event, 'Compare')">🔀 Confronta test</button>
         </div>
         
         <!-- Contenuto dei tabs -->
@@ -102,10 +102,10 @@
             </table>
         </div>
         
-        <div id="Compare" class="tabcontent" style="display:none; height:400px; width:100%">
-            <canvas id="lineChart"></canvas>
+        <div id="Compare" class="tabcontent" style="display:none; height:300px; width:100%">
+            <canvas id="compareChart1"></canvas>
             <!-- Il canvas in cui disegneremo il grafico di confronto -->
-            <canvas id="compareChart"></canvas>
+            <canvas id="compareChart2" style="margin-top:20px"></canvas>
         </div>
     </div>
 
@@ -126,12 +126,17 @@
 
             // Se il tab Compare è attivo, genera un grafico di confronto
             if (tabName === 'Compare') {
-                 console.info("Richesto tab compare");
-                 loadJSON(function(response) {
+                loadJSON(function(response) {
                     if (response) {
-                        drawCompareCharts(response);
+                        drawChart(response,'compareChart1');
                     }
-                });
+                },"1");
+			
+                loadJSON(function(response) {
+                    if (response) {
+                        drawCompareChart(response);
+                    }
+                },"0");
                 
             }
         }
@@ -155,10 +160,9 @@
         }
 
         // Funzione per caricare i dati dal file JSON
-        function loadJSON(callback) {
+        function loadJSON(callback,strategyLive) {
             var xobj = new XMLHttpRequest();
             var strategy = getParameterByName('strategy');  // Ottieni il valore del parametro
-            var strategyLive = getParameterByName('live');
             if (!strategy) {
                 console.error("Il parametro 'strategy' non è stato fornito.");
                 return;
@@ -184,8 +188,13 @@
         }
 
         // Funzione per disegnare il grafico una volta che i dati sono stati caricati
-        function drawChart(data) {
-            var ctx = document.getElementById('lineChart').getContext('2d');
+        function drawChart(data,canvaName) {
+            // JS - Destroy exiting Chart Instance to reuse <canvas> element
+            let chartStatus = Chart.getChart(canvaName); // <canvas> id
+            if (chartStatus != undefined) {
+               chartStatus.destroy();
+            }		
+            var ctx = document.getElementById(canvaName).getContext('2d');
             var myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
@@ -240,17 +249,22 @@
             }            
         }
 
-        function drawCompareCharts(data) {
-            var ctx = document.getElementById('compareChart').getContext('2d');
+        function drawCompareChart(data) {
+		    // JS - Destroy exiting Chart Instance to reuse <canvas> element
+            let chartStatus = Chart.getChart('compareChart2'); // <canvas> id
+            if (chartStatus != undefined) {
+               chartStatus.destroy();
+            }
+            var ctx = document.getElementById('compareChart2').getContext('2d');
             var myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: data.labels,
                     datasets: [{
-                        label: 'Rendimento strategia #'+getParameterByName('strategy'),
+                        label: 'Rendimento strategia #'+getParameterByName('strategy')+" (Test)",
                         data: data.values,
                         fill: false,
-                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderColor: 'rgba(191, 75, 95, 1)',
                         borderWidth: 2,
                         tension: 0.2
                     }]
@@ -268,9 +282,9 @@
         document.addEventListener('DOMContentLoaded', function() {
             loadJSON(function(response) {
                 if (response) {
-                    drawChart(response);
+                    drawChart(response,'lineChart');
                 }
-            });
+            },getParameterByName('live'));
         });
         
     </script>
